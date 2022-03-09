@@ -157,7 +157,7 @@ inline void stdoutBackToConsole() {
 #ifdef _WIN64
     freopen("CON", "w", stdout);
 #else
-    freopen("/dev/console", "w", stdout);
+    freopen("result.txt", "a+", stdout);
 #endif
 }
 
