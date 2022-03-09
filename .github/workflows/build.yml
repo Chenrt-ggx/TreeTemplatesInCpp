@@ -1,0 +1,21 @@
+name: Build and Test
+
+on:
+    push:
+        branches:
+            - main
+
+env:
+    BUILD_TYPE: Release
+
+jobs:
+    build-and-release:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: config cmake
+              run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+            - name: compile
+              run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+            - name: test
+              run: ${{github.workspace}}/build/TreeStructure -Local
